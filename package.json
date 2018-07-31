@@ -2,10 +2,6 @@
   "name": "switch-cron-job",
   "version": "0.0.1",
   "description": "NodeJS cron job for switching a relay on sunrise and sunset",
-  "main": "server.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FrankMerema/switch-cron-job.git"
@@ -15,5 +11,22 @@
   "bugs": {
     "url": "https://github.com/FrankMerema/switch-cron-job/issues"
   },
-  "homepage": "https://github.com/FrankMerema/switch-cron-job#readme"
+  "homepage": "https://github.com/FrankMerema/switch-cron-job#readme",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node -r ts-node/register src/start.ts"
+  },
+  "devDependencies": {
+    "@types/express": "4.11.1",
+    "@types/node": "9.6.4",
+    "ts-node": "6.0.3",
+    "typescript": "2.8.3"
+  },
+  "dependencies": {
+    "axios": "0.18.0",
+    "body-parser": "1.18.2",
+    "express": "4.16.3",
+    "pigpio-mock": "0.0.1"
+  }
 }
