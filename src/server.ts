@@ -1,8 +1,6 @@
-// https://api.openweathermap.org/data/2.5/weather?id=2750466&appid=5c9ddbb99091bfc41122d3e0dad08a61
-import axios from 'axios';
-
-import {Request, Response} from 'express';
-import {OpenWeatherHandler} from './handlers/open-weather.handler';
+import { Request, Response } from 'express';
+import { RecurrenceRule, scheduleJob } from 'node-schedule';
+import { OpenWeatherHandler } from './handlers/open-weather.handler';
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -16,11 +14,25 @@ export function start() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
 
-    const weather = new OpenWeatherHandler();
+    const weatherHandler = new OpenWeatherHandler();
 
-    weather.getCurrentWeather();
+    const sunriseRule = new RecurrenceRule();
+    sunriseRule.hour = 3;
+    sunriseRule.minute = 0;
 
-    // app.use('/api/switch', new SwitchRoutes().getRouter());
+    const sunsetRule = new RecurrenceRule();
+    sunsetRule.hour = 15;
+    sunsetRule.minute = 0;
+
+    scheduleJob('sunriseFetching', sunriseRule, () => {
+        console.log(`Fetching new weather data at: ${new Date()}`);
+        weatherHandler.setNewSunriseJob();
+    });
+
+    scheduleJob('sunsetFetching', sunsetRule, () => {
+        console.log(`Fetching new weather data at: ${new Date()}`);
+        weatherHandler.setNewSunsetJob();
+    });
 
     app.get('/api/status', (req: Request, res: Response) => {
         res.json({status: 'OK'});
