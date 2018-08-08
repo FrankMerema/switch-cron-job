@@ -1,0 +1,13 @@
+[Unit]
+Description=Switch Cron Job Service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/frank/dev/switch-cron-job
+ExecStart=/usr/local/bin/npm start
+Restart=on-failure
+User=frank
+Environment=PORT=3000
+
+[Install]
+WantedBy=multi-user.target
