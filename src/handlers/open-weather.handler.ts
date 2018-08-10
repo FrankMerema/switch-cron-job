@@ -1,6 +1,7 @@
 import axios, { AxiosPromise } from 'axios';
 import { Job, scheduleJob } from 'node-schedule';
 import { OpenWeather } from '../models/weather.model';
+import { MessageLogHandler } from './message-log.handler';
 
 const config = require('../../service.config.json');
 
@@ -10,10 +11,12 @@ export class OpenWeatherHandler {
 
     private sunriseJob: Job;
     private sunsetJob: Job;
+    private logHandler: MessageLogHandler;
 
-    constructor() {
+    constructor(logHandler: MessageLogHandler) {
         this.setNewSunriseJob();
         this.setNewSunsetJob();
+        this.logHandler = logHandler;
     }
 
     setNewSunriseJob(): void {
@@ -25,6 +28,7 @@ export class OpenWeatherHandler {
 
                 this.sunriseJob = scheduleJob('sunrise', new Date(weather.data.sys.sunrise * 1000),
                     () => {
+                        this.logHandler.addToLog({description: 'Fetched data was apparently set, sunrise executed!', timestamp: new Date()});
                         console.log(`Fetched data was apparently set, sunrise executed at: ${new Date()}`);
                     });
             });
@@ -39,6 +43,7 @@ export class OpenWeatherHandler {
 
                 this.sunsetJob = scheduleJob('sunset', new Date(weather.data.sys.sunset * 1000),
                     () => {
+                        this.logHandler.addToLog({description: 'Fetched data was apparently set, sunset executed!', timestamp: new Date()});
                         console.log(`Fetched data was apparently set, sunset is executed at: ${new Date()}`);
                     });
             });

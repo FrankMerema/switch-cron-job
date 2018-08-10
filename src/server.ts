@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { RecurrenceRule, scheduleJob } from 'node-schedule';
+import { MessageLogHandler } from './handlers/message-log.handler';
 import { OpenWeatherHandler } from './handlers/open-weather.handler';
 
 const express = require('express');
@@ -14,7 +15,8 @@ export function start() {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
 
-    const weatherHandler = new OpenWeatherHandler();
+    const messageLogHandler = new MessageLogHandler();
+    const weatherHandler = new OpenWeatherHandler(messageLogHandler);
 
     const sunriseRule = new RecurrenceRule();
     sunriseRule.hour = 3;
@@ -25,17 +27,19 @@ export function start() {
     sunsetRule.minute = 0;
 
     scheduleJob('sunriseFetching', sunriseRule, () => {
-        console.log(`Fetching new weather data at: ${new Date()}`);
+        messageLogHandler.addToLog({description: 'Fetching new sunrise weather data ', timestamp: new Date()});
+        console.log(`Fetching new sunrise weather data at: ${new Date()}`);
         weatherHandler.setNewSunriseJob();
     });
 
     scheduleJob('sunsetFetching', sunsetRule, () => {
-        console.log(`Fetching new weather data at: ${new Date()}`);
+        messageLogHandler.addToLog({description: 'Fetching new sunset weather data ', timestamp: new Date()});
+        console.log(`Fetching new sunset weather data at: ${new Date()}`);
         weatherHandler.setNewSunsetJob();
     });
 
     app.get('/api/status', (req: Request, res: Response) => {
-        res.json({status: 'OK'});
+        res.json({status: 'OK', messageLog: messageLogHandler.getLog()});
     });
 
     app.listen(port, () => {
