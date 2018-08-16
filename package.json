@@ -1,6 +1,6 @@
 {
   "name": "switch-cron-job",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NodeJS cron job for switching a relay on sunrise and sunset",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "0.18.0",
+    "pigpio": "1.1.2",
     "body-parser": "1.18.2",
     "express": "4.16.3",
     "node-schedule": "1.3.0"

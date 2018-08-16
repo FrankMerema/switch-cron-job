@@ -1,14 +1,15 @@
-import {Request, Response, Router} from 'express';
-import {SwitchHandler} from '../handlers/switch.handler';
+import { Request, Response, Router } from 'express';
+import { MessageLogHandler } from '../handlers/message-log.handler';
+import { SwitchHandler } from '../handlers/switch.handler';
 
 export class SwitchRoutes {
 
     private readonly router: Router;
     private switchHandler: SwitchHandler;
 
-    constructor() {
+    constructor(messageLogHandler: MessageLogHandler) {
         this.router = Router();
-        this.switchHandler = new SwitchHandler();
+        this.switchHandler = new SwitchHandler(messageLogHandler);
         this.setupRoutes();
     }
 
@@ -17,15 +18,13 @@ export class SwitchRoutes {
     }
 
     private setupRoutes(): void {
-        this.router.get('/state/:pin', (req: Request, res: Response) => this.getStateOfSwitch(req, res));
+        this.router.get('/state', (req: Request, res: Response) => this.getStateOfSwitch(req, res));
 
-        this.router.post('/state/:pin', (req: Request, res: Response) => this.changeState(req, res));
+        this.router.post('/state', (req: Request, res: Response) => this.changeState(req, res));
     }
 
     private getStateOfSwitch(req: Request, res: Response): void {
-        const pin = req.params.pin;
-
-        this.switchHandler.getStateOfSwitch(pin)
+        this.switchHandler.getStateOfSwitch()
             .then(state => {
                 res.json({state: state});
             }).catch(error => {
@@ -34,10 +33,7 @@ export class SwitchRoutes {
     }
 
     private changeState(req: Request, res: Response): void {
-        const pin = req.params.pin;
-        const state = req.body.state;
-
-        this.switchHandler.changeState(pin, state)
+        this.switchHandler.changeState()
             .then(() => {
                 res.json({});
             }).catch(error => {

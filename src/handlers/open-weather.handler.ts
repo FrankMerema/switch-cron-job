@@ -1,5 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
 import { Job, scheduleJob } from 'node-schedule';
+import { processDate } from '../helpers/time-zone-parser';
 import { OpenWeather } from '../models/weather.model';
 import { MessageLogHandler } from './message-log.handler';
 
@@ -26,11 +27,15 @@ export class OpenWeatherHandler {
                     this.sunriseJob.cancel();
                 }
 
-                this.sunriseJob = scheduleJob('sunrise', new Date(weather.data.sys.sunrise * 1000),
+                this.sunriseJob = scheduleJob('sunrise', new Date((weather.data.sys.sunrise + 600) * 1000),
                     () => {
-                        this.logHandler.addToLog({description: 'Fetched data was apparently set, sunrise executed!', timestamp: new Date()});
+                        this.logHandler.addToLog({
+                            description: 'Fetched data was apparently set, sunrise executed!',
+                            timestamp: processDate(new Date())
+                        });
                         console.log(`Fetched data was apparently set, sunrise executed at: ${new Date()}`);
                     });
+
             });
     }
 
@@ -41,9 +46,12 @@ export class OpenWeatherHandler {
                     this.sunsetJob.cancel();
                 }
 
-                this.sunsetJob = scheduleJob('sunset', new Date(weather.data.sys.sunset * 1000),
+                this.sunsetJob = scheduleJob('sunset', new Date((weather.data.sys.sunset - 600) * 1000),
                     () => {
-                        this.logHandler.addToLog({description: 'Fetched data was apparently set, sunset executed!', timestamp: new Date()});
+                        this.logHandler.addToLog({
+                            description: 'Fetched data was apparently set, sunset executed!',
+                            timestamp: processDate(new Date())
+                        });
                         console.log(`Fetched data was apparently set, sunset is executed at: ${new Date()}`);
                     });
             });

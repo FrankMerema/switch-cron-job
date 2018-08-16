@@ -1,7 +1,4 @@
-export interface LogMessage {
-    description: string,
-    timestamp: Date
-}
+import { LogMessage } from '../models/log-message.model';
 
 export class MessageLogHandler {
 
