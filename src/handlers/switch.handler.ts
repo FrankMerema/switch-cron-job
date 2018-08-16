@@ -27,7 +27,7 @@ export class SwitchHandler {
         }
     }
 
-    changeState(): Promise<any> {
+    switchState(): Promise<any> {
         if (this.switchList[config.switch.pin]) {
             return this.getStateOfSwitch()
                 .then(state => {
@@ -43,6 +43,20 @@ export class SwitchHandler {
                             return Promise.resolve({state: newState});
                         });
                 });
+        } else {
+            return Promise.reject({error: `No switch known!`});
+        }
+    }
+
+    changeState(state: State): Promise<void> {
+        if (this.switchList[config.switch.pin]) {
+            return writePinState(this.switchList[config.switch.pin], state).then(() => {
+                this.logHandler.addToLog({
+                    description: `Switched state of pin to state: ${state}!`,
+                    timestamp: processDate(new Date())
+                });
+                return Promise.resolve();
+            });
         } else {
             return Promise.reject({error: `No switch known!`});
         }

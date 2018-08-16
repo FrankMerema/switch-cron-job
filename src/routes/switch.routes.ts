@@ -1,5 +1,4 @@
 import { Request, Response, Router } from 'express';
-import { MessageLogHandler } from '../handlers/message-log.handler';
 import { SwitchHandler } from '../handlers/switch.handler';
 
 export class SwitchRoutes {
@@ -7,9 +6,9 @@ export class SwitchRoutes {
     private readonly router: Router;
     private switchHandler: SwitchHandler;
 
-    constructor(messageLogHandler: MessageLogHandler) {
+    constructor(switchHandler: SwitchHandler) {
         this.router = Router();
-        this.switchHandler = new SwitchHandler(messageLogHandler);
+        this.switchHandler = switchHandler;
         this.setupRoutes();
     }
 
@@ -33,7 +32,7 @@ export class SwitchRoutes {
     }
 
     private changeState(req: Request, res: Response): void {
-        this.switchHandler.changeState()
+        this.switchHandler.switchState()
             .then(() => {
                 res.json({});
             }).catch(error => {

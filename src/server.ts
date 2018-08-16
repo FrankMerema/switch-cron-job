@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { RecurrenceRule, scheduleJob } from 'node-schedule';
 import { MessageLogHandler } from './handlers/message-log.handler';
 import { OpenWeatherHandler } from './handlers/open-weather.handler';
+import { SwitchHandler } from './handlers/switch.handler';
 import { processDate } from './helpers/time-zone-parser';
 import { SwitchRoutes } from './routes/switch.routes';
 
@@ -18,7 +19,8 @@ export function start() {
     app.use(bodyParser.urlencoded({extended: false}));
 
     const messageLogHandler = new MessageLogHandler();
-    const weatherHandler = new OpenWeatherHandler(messageLogHandler);
+    const switchHandler = new SwitchHandler(messageLogHandler);
+    const weatherHandler = new OpenWeatherHandler(switchHandler, messageLogHandler);
 
     const sunriseRule = new RecurrenceRule();
     sunriseRule.hour = 3;
@@ -46,7 +48,7 @@ export function start() {
         weatherHandler.setNewSunsetJob();
     });
 
-    app.use('/api/switch', new SwitchRoutes(messageLogHandler).getRouter());
+    app.use('/api/switch', new SwitchRoutes(switchHandler).getRouter());
 
     app.get('/', (req: Request, res: Response) => {
         res.json({status: 'OK'});
