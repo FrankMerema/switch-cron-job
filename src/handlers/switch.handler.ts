@@ -21,6 +21,8 @@ export class SwitchHandler {
                 description: `Getting state of pin!`,
                 timestamp: processDate(new Date())
             });
+            console.log(`Getting state of pin at ${new Date()}`);
+
             return readPinState(this.switchList[config.switch.pin]);
         } else {
             return Promise.reject({error: `No switch known!`});
@@ -37,6 +39,7 @@ export class SwitchHandler {
                         description: `Switched state of pin to state: ${newState}!`,
                         timestamp: processDate(new Date())
                     });
+                    console.log(`Switching pin state to ${newState} at ${new Date()}`);
 
                     return writePinState(this.switchList[config.switch.pin], newState)
                         .then(() => {
@@ -55,6 +58,8 @@ export class SwitchHandler {
                     description: `Switched state of pin to state: ${state}!`,
                     timestamp: processDate(new Date())
                 });
+                console.log(`Switching pin state to ${state} at ${new Date()}`);
+
                 return Promise.resolve();
             });
         } else {

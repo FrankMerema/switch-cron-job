@@ -9,6 +9,10 @@ export class MessageLogHandler {
     }
 
     addToLog(message: LogMessage): void {
+        if (this.log.length > 100) {
+            this.log.splice(0, 20);
+        }
+
         this.log.push(message);
     }
 

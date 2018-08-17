@@ -5,6 +5,7 @@ import { OpenWeatherHandler } from './handlers/open-weather.handler';
 import { SwitchHandler } from './handlers/switch.handler';
 import { processDate } from './helpers/time-zone-parser';
 import { SwitchRoutes } from './routes/switch.routes';
+import { WeatherRoutes } from './routes/weather.routes';
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -49,6 +50,7 @@ export function start() {
     });
 
     app.use('/api/switch', new SwitchRoutes(switchHandler).getRouter());
+    app.use('/api/weather', new WeatherRoutes(weatherHandler).getRouter());
 
     app.get('/', (req: Request, res: Response) => {
         res.json({status: 'OK'});

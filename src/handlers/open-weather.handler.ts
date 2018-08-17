@@ -68,6 +68,19 @@ export class OpenWeatherHandler {
             });
     }
 
+    getSchedules(): Promise<{ sunset: Date, sunrise: Date }> {
+        let schedules: any = {};
+
+        if (this.sunriseJob) {
+            schedules.sunrise = this.sunriseJob.nextInvocation();
+        }
+        if (this.sunsetJob) {
+            schedules.sunset = this.sunsetJob.nextInvocation();
+        }
+
+        return Promise.resolve(schedules);
+    }
+
     private scheduleAJob(name: string, date: Date, state: State): Job {
         return scheduleJob(name, date,
             () => {
