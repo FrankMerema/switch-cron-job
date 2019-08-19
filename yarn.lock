@@ -40,10 +40,10 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
 
-"@types/node-schedule@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@types/node-schedule/-/node-schedule-1.2.3.tgz#614ba775c4c9b200e5f939a4eeef6727eb0ed6b7"
-  integrity sha512-pmuGe7xlx4hnUnOeGk2G46xxGKesF8reddLPiQu0tEIOQePMjDezjaOXFLfRPFBDWm03Aj8FoqPTuFxQt9LDaw==
+"@types/node-schedule@1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@types/node-schedule/-/node-schedule-1.2.4.tgz#2dce38dd7d87e77cd293113ac72f795fb9f6dfe0"
+  integrity sha512-s8ie8rUwAtX0Si75SiKH14akE/Ofw/Hx4Exbulv4wOQJEDerI7zeOaDODr/a1UEaHN19VkmZCt9Q0rFEKrVE5g==
   dependencies:
     "@types/node" "*"
 
