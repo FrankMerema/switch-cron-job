@@ -1,5 +1,4 @@
 import axios, { AxiosPromise } from 'axios';
-import { settings } from 'cluster';
 import { Job, scheduleJob } from 'node-schedule';
 import { processDate } from '../helpers/time-zone-parser';
 import { State } from '../models/state.enum';
