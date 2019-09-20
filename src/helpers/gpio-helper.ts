@@ -1,7 +1,7 @@
 import {GpioDirection, GpioEdgeType, GpioOptions} from '../models/gpio-options.model';
 import {State} from '../models/state.enum';
 
-const GPIO = require('pigpio').Gpio;
+const GPIO = require('pigpio-mock').Gpio;
 
 export function createGpio(pin: number, direction: GpioDirection, edge?: GpioEdgeType): Promise<any> {
     const config: GpioOptions = {};

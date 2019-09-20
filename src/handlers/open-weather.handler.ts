@@ -1,4 +1,5 @@
 import axios, { AxiosPromise } from 'axios';
+import { settings } from 'cluster';
 import { Job, scheduleJob } from 'node-schedule';
 import { processDate } from '../helpers/time-zone-parser';
 import { State } from '../models/state.enum';
@@ -9,8 +10,6 @@ import { SwitchHandler } from './switch.handler';
 const config = require('../../service.config.json');
 
 export class OpenWeatherHandler {
-
-    private readonly WEATHER_URL = 'http://api.openweathermap.org/data/2.5/weather';
 
     private sunriseJob: Job;
     private sunsetJob: Job;
@@ -95,11 +94,6 @@ export class OpenWeatherHandler {
     }
 
     private getCurrentWeather(): AxiosPromise<OpenWeather> {
-        return axios.get<OpenWeather>(this.WEATHER_URL, {
-            params: {
-                id: config.openWeather.cityId,
-                appid: config.openWeather.secretKey
-            }
-        });
+        return axios.get<OpenWeather>(config.openWeather.baseUrl + config.openWeather.cityId);
     }
 }
