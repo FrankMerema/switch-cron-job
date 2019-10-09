@@ -23,7 +23,7 @@
     "@types/node": "12.7.12",
     "@types/node-schedule": "1.2.4",
     "ts-node": "8.4.1",
-    "typescript": "3.6.3",
+    "typescript": "3.6.4",
     "pigpio-mock": "0.0.1"
   },
   "dependencies": {
