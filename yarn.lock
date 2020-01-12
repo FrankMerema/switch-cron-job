@@ -422,10 +422,10 @@ pigpio-mock@0.0.1:
   resolved "https://registry.yarnpkg.com/pigpio-mock/-/pigpio-mock-0.0.1.tgz#5e5b3fd74987b6bfcc653b2de1219aeabbb0dcb8"
   integrity sha1-Xls/10mHtr/MZTst4SGa6ruw3Lg=
 
-pigpio@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/pigpio/-/pigpio-2.0.1.tgz#5d8caf9b62608ecb6d94db9f5b9ddd90adbeba14"
-  integrity sha512-ZpA8+2CnUGiHx5pAnf6Apokmg841UGt3LqLhLRSfBajv5N666tiuSJ5GXwlcOhtQLoYG/Qush+Ook7Ev2OZjZg==
+pigpio@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pigpio/-/pigpio-3.0.0.tgz#4eefca98d839ba43395970b4937de21e369af4c0"
+  integrity sha512-zrin+4KpSTupodUpTAJdWPf9BFLH1T2asXhvbf0/QUjWMO2s9csn0H9LqtlajCCmeNZagkeR648NN1dXj1BkHw==
   dependencies:
     bindings "^1.5.0"
     nan "^2.14.0"
