@@ -372,10 +372,10 @@ ms@2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.1.tgz#30a5864eb3ebb0a66f2ebe6d727af06a09d86e0a"
   integrity sha512-tgp+dl5cGk28utYktBsrFqA7HKgrhgPsg6Z/EfhWI4gl1Hwq8B/GmY/0oXZ6nF8hDVesS/FpnYaD/kOWhYQvyg==
 
-nan@^2.14.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
-  integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
+nan@^2.14.2:
+  version "2.14.2"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
+  integrity sha512-M2ufzIiINKCuDfBSAUr1vWQ+vuVcA9kqx8JJUsbQi6yf1uGRyb7HfpdfUr5qLXf3B/t8dPvcjhKMmlfnP47EzQ==
 
 negotiator@0.6.2:
   version "0.6.2"
@@ -415,13 +415,13 @@ pigpio-mock@0.0.1:
   resolved "https://registry.yarnpkg.com/pigpio-mock/-/pigpio-mock-0.0.1.tgz#5e5b3fd74987b6bfcc653b2de1219aeabbb0dcb8"
   integrity sha1-Xls/10mHtr/MZTst4SGa6ruw3Lg=
 
-pigpio@3.2.3:
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/pigpio/-/pigpio-3.2.3.tgz#7ce4b5424023e1714783640f55b27d2a7e604907"
-  integrity sha512-DrZXuA8Yq+Xm4S/iTqPvZnNLEIzrH95PTXn2GuhH3g6CYKuFYqKQMXK/WcbuDvvN2omfwprI8WC87eWxat6COw==
+pigpio@3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/pigpio/-/pigpio-3.3.1.tgz#fc31885ea2bfb335cccb80b9d78b443fcfe56b90"
+  integrity sha512-z7J55K14IwWkA+oW5JHzWcgwThFAuJ7IzV3A2//yRm4jJ2DTU0DHIy91DB0siOi12rvvlrIhRetEuAo0ztF/vQ==
   dependencies:
     bindings "^1.5.0"
-    nan "^2.14.1"
+    nan "^2.14.2"
 
 proxy-addr@~2.0.5:
   version "2.0.5"
